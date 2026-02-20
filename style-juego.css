@@ -1,3 +1,4 @@
+/* --- CONFIGURACIÓN BASE RESPONSIVA --- */
 body {
     margin: 0;
     padding: 0;
@@ -5,22 +6,26 @@ body {
     background-color: #f0f0f0;
     display: flex;
     justify-content: center;
+    min-height: 100vh;
 }
 
-.game-page {
+.game-page, .game-container {
     background-color: white;
-    width: 100%;
+    width: 95%; /* Ocupa casi todo el ancho en móvil */
     max-width: 850px;
-    min-height: 1100px;
-    padding: 60px;
+    min-height: 100vh;
+    padding: 20px; /* Reducido para móvil */
+    margin: 10px auto;
     position: relative;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    overflow: hidden;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
+/* Título escalable */
 .pixel-title {
     color: #a4c7f0;
-    font-size: 4rem;
+    font-size: clamp(2rem, 8vw, 4rem); /* Tamaño fluido */
     text-align: center;
     margin-bottom: 10px;
     font-family: 'Comic Sans MS', cursive;
@@ -29,115 +34,92 @@ body {
 
 .instruction-text {
     text-align: center;
-    font-size: 1.1rem;
-    margin-bottom: 40px;
-    padding: 0 20px;
+    font-size: 1rem;
+    margin-bottom: 30px;
 }
 
+/* Sección de Nombre */
 .name-section {
-    font-size: 1.4rem;
-    margin-bottom: 40px;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column; /* Nombre arriba del input en móvil */
+    gap: 10px;
 }
 
 #student-name {
     border: none;
     border-bottom: 2px solid black;
-    width: 70%;
+    width: 100%;
     font-size: 1.2rem;
     outline: none;
-    margin-left: 10px;
 }
 
-.level-container {
-    margin-bottom: 50px;
-}
-
-h3 {
-    font-weight: normal;
-    margin-bottom: 25px;
-}
-
-.question { margin-bottom: 25px; }
-
-.line-input {
-    width: 100%;
-    border: none;
-    border-bottom: 1.5px solid black;
-    margin-top: 10px;
-    outline: none;
-}
-
-/* Nivel 2 Drag and Drop */
+/* --- NIVEL 2: DRAG AND DROP --- */
 .word-bank {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap; /* Para que bajen si no caben */
+    justify-content: center;
+    gap: 10px;
     margin: 20px 0;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 10px;
 }
 
 .word {
-    padding: 5px 15px;
+    padding: 10px 15px; /* Más área de toque */
     cursor: grab;
     background: #fff;
-    border-radius: 4px;
-    font-size: 1.1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    touch-action: none; /* Evita conflictos de scroll en móvil */
 }
 
 .dropzone {
     display: inline-block;
-    width: 150px;
-    border-bottom: 1.5px solid black;
-    height: 20px;
-    vertical-align: bottom;
+    width: 120px;
+    border-bottom: 2px solid #333;
+    min-height: 25px;
+    vertical-align: middle;
     text-align: center;
     color: #2980b9;
     font-weight: bold;
+    margin: 0 5px;
 }
 
-.submit-btn {
-    background-color: #7ba3d4;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    display: block;
-    margin: 20px auto;
-}
-
-/* Ondas azules inferiores */
-.wave-decoration {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background: #4fc3f7;
-    clip-path: polygon(0 60%, 20% 40%, 45% 70%, 75% 30%, 100% 60%, 100% 100%, 0 100%);
-    opacity: 0.6;
-}
-
-
-.game-container {
-    background: white;
-    width: 900px;
-    min-height: 1200px;
-    margin: 20px auto;
-    position: relative;
-    padding: 60px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    overflow: hidden;
-}
-
-.level-title {
-    font-size: 1.4rem;
-    margin-bottom: 50px;
-    font-weight: normal;
-}
-
+/* --- NIVEL DE UNIR CON LÍNEAS --- */
 .match-area {
     position: relative;
-    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.columns-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.column-text, .column-images {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.match-item {
+    padding: 12px 8px;
+    background: #f0f7ff;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.match-img {
+    width: 70px; /* Más pequeñas para que quepan */
+    height: 70px;
+    object-fit: contain;
+    align-self: center;
 }
 
 #canvasLineas {
@@ -146,113 +128,60 @@ h3 {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Importante para poder clickear lo de abajo */
+    pointer-events: none;
     z-index: 5;
 }
 
-.columns-wrapper {
-    display: flex;
-    justify-content: space-between;
-    z-index: 10;
-    position: relative;
-}
-
-.column-text, .column-images {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    width: 40%;
-}
-
-.match-item {
+/* --- BOTONES ADAPTADOS --- */
+.btn-verify, .btn-send, .submit-btn, .btn-check-level2 {
+    width: 100%; /* Botones anchos en móvil */
+    max-width: 300px;
     padding: 15px;
-    cursor: pointer;
-    background: #fff;
-    transition: 0.3s;
+    margin: 10px auto;
+    display: block;
     font-size: 1.1rem;
+    border-radius: 30px;
 }
 
-.match-img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    cursor: pointer;
-    align-self: flex-end;
+/* --- DECORACIÓN (Ondas) --- */
+.wave-decoration, .footer-waves {
+    display: none; /* Las ocultamos en móvil para evitar scroll infinito */
 }
 
-.selected {
-    color: #3498db;
-    font-weight: bold;
-    transform: scale(1.05);
+/* --- MEDIA QUERIES PARA TABLET/PC --- */
+@media (min-width: 768px) {
+    .game-page, .game-container {
+        padding: 60px;
+        margin: 20px auto;
+    }
+
+    .name-section {
+        flex-direction: row;
+    }
+
+    #student-name {
+        width: 70%;
+    }
+
+    .column-text, .column-images {
+        gap: 40px;
+    }
+
+    .match-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .btn-verify, .btn-send, .submit-btn {
+        width: auto;
+    }
+
+    .wave-decoration, .footer-waves {
+        display: block; /* Solo se ven en pantallas grandes */
+    }
 }
 
-/* Botones */
-.actions {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.btn-verify, .btn-send {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 0 10px;
-}
-
-.btn-verify { background: #eee; color: #333; }
-.btn-send { background: #3498db; color: white; }
-
-/* Ondas del pie de página */
-.footer-waves {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 200px;
-    z-index: 1;
-}
-
-.wave {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    clip-path: ellipse(80% 50% at 50% 100%);
-}
-
-.blue-light { background: #4fc3f7; opacity: 0.8; height: 180px; }
-.blue-dark { background: #2980b9; opacity: 0.6; height: 140px; transform: scaleX(1.2); }
-.green { background: #81c784; opacity: 0.5; height: 100px; transform: translate(-50px, 20px); }
-
-.verify-container {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.btn-check-level2 {
-    background-color: #5da9e9;
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.btn-check-level2:hover {
-    background-color: #3a8cd1;
-}
-
-/* Colores para la validación */
-.correct {
-    border-bottom: 2px solid #2ecc71 !important;
-    color: #2ecc71 !important;
-}
-
-.incorrect {
-    border-bottom: 2px solid #e74c3c !important;
-    color: #e74c3c !important;
-}
+/* Estados de validación */
+.correct { border-bottom: 3px solid #2ecc71 !important; color: #2ecc71 !important; }
+.incorrect { border-bottom: 3px solid #e74c3c !important; color: #e74c3c !important; }
+.selected { background: #d4e6f1 !important; border: 1px solid #3498db; }
