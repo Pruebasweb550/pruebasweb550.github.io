@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level Game - Educeral Blockes</title>
+    <link rel="stylesheet" href="style-juego.css">
+</head>
+<body>
+
+    <div class="game-page">
+        <form action="https://formspree.io/f/mqeddled" method="POST" id="gameForm">
+            
+            <header class="game-header">
+                <h1 class="pixel-title">Level game</h1>
+                <p class="instruction-text">Pass the following levels, test your knowledge of adjectives, comparatives and superlatives, let's go!!!</p>
+            </header>
+
+            <section class="name-section">
+                <label for="name">Name:</label>
+                <input type="text" name="Alumno" id="student-name" required>
+            </section>
+
+            <section class="level-container">
+                <h3>level 1: Complete the following sentences by writing the correct order of the adjectives:</h3>
+                
+                <div class="question">
+                    <p>1. I like this (sweet, brown, beautiful) dog.</p>
+                    <input type="text" name="L1_Pregunta_1" class="line-input">
+                </div>
+                <div class="question">
+                    <p>2. She love than (red, circular, big) apple.</p>
+                    <input type="text" name="L1_Pregunta_2" class="line-input">
+                </div>
+                <div class="question">
+                    <p>3. We enjoy those (small, colorful, cute, new) flowers.</p>
+                    <input type="text" name="L1_Pregunta_3" class="line-input">
+                </div>
+                <div class="question">
+                    <p>4. They love those (soft cute, small) cats.</p>
+                    <input type="text" name="L1_Pregunta_4" class="line-input">
+                </div>
+                <div class="question">
+                    <p>5. He wants those ( warm, white, fluffy) blankets.</p>
+                    <input type="text" name="L1_Pregunta_5" class="line-input">
+                </div>
+            </section>
+
+            <section class="level-container">
+                <h3>level 2: Complete the following sentences, writing the comparisons correctly::</h3>
+                
+                <div class="word-bank" id="wordBank">
+                    <span class="word" draggable="true" id="w1">taller</span>
+                    <span class="word" draggable="true" id="w2">lighter</span>
+                    <span class="word" draggable="true" id="w3">organized</span>
+                    <span class="word" draggable="true" id="w4">patient</span>
+                    <span class="word" draggable="true" id="w5">bigger</span>
+                </div>
+
+                <div class="drop-questions">
+                    <p>1. Rocio is more <span class="dropzone" id="dz1"></span> and responsable than Ángel.</p>
+                    <p>2. David is <span class="dropzone" id="dz2"></span> and stronger than Oscar.</p>
+                    <p>3. The teacher is more <span class="dropzone" id="dz3"></span> than the students.</p>
+                    <p>4. The backpack is <span class="dropzone" id="dz4"></span> and smaller than the school bag.</p>
+                    <p>5. The computer is <span class="dropzone" id="dz5"></span> than the tablet.</p>
+                </div>
+
+                <input type="hidden" name="L2_Respuesta_1" id="ans1">
+                <input type="hidden" name="L2_Respuesta_2" id="ans2">
+                <input type="hidden" name="L2_Respuesta_3" id="ans3">
+                <input type="hidden" name="L2_Respuesta_4" id="ans4">
+                <input type="hidden" name="L2_Respuesta_5" id="ans5">
+
+                <div class="verify-container">
+    <button type="button" class="btn-check-level2" onclick="verificarNivel2()">
+        CHECK ANSWERS
+    </button>
+</div>
+
+            </section>
+
+            <section class="level-container" id="level3">
+                <h2 class="level-title">level 3: Match the superlative sentences with their corresponding image::</h2>
+                
+                <div class="match-area">
+                    <canvas id="canvasLineas"></canvas>
+
+                    <div class="columns-wrapper">
+                        <div class="column-text">
+                            <div class="match-item" data-id="1">My dad is the biggest in the house.</div>
+                            <div class="match-item" data-id="2">My friend is the tallest in the class.</div>
+                            <div class="match-item" data-id="3">My brother is the happiest in the house.</div>
+                            <div class="match-item" data-id="4">The cat is the most curious animal I know.</div>
+                            <div class="match-item" data-id="5">The beach clothes are the most comfortable in my closet.</div>
+                        </div>
+
+                        <div class="column-images">
+                            <img src="1.jpeg" class="match-img" data-id="2" alt="Tallest">
+                            <img src="2.jpeg" class="match-img" data-id="4" alt="Cat">
+                            <img src="3.jpeg" class="match-img" data-id="3" alt="Happy">
+                            <img src="4.jpeg" class="match-img" data-id="5" alt="Beach">
+                            <img src="5.jpeg" class="match-img" data-id="1" alt="Family">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button type="button" class="btn-verify" onclick="verificarRespuestas()">VERIFICAR RESPUESTAS</button>
+                </div>
+            </section>
+
+            <button type="submit" class="submit-btn">ENVIAR</button>
+        </form>
+
+        <div class="wave-decoration"></div>
+    </div>
+
+    <script src="script-juego.js"></script>
+</body>
+</html>
